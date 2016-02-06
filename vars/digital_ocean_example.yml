@@ -1,0 +1,4 @@
+digital_ocean_api_token: XXXXXXXXXXXXXXXX
+digital_ocean_hosts:
+  - host1
+  - host2

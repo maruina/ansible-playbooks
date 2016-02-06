@@ -1,0 +1,13 @@
+#!/usr/bin/env ansible-playbook
+# Playbook for bootstrap Digital Ocean droplets
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  vars_files:
+    - vars/digital_ocean.yml
+  roles:
+    - digital_ocean.ssh_key
+    - digital_ocean.droplet
+  vars:
+    - ansible_python_interpreter: ~/miniconda/envs/ansible/bin/python

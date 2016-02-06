@@ -1,0 +1,14 @@
+---
+- name: Create local SSH key
+  shell: test -f ~/.ssh/{{ item }} || ssh-keygen -t rsa -N '' -b 4096 -C "{{ item }}@digitalocean.com" -f ~/.ssh/{{ item }}
+  with_items: digital_ocean_hosts
+
+- name: Create Digital Ocean SSH key from local key
+  digital_ocean:
+    command: ssh
+    api_token: "{{ digital_ocean_api_token }}"
+    name: "{{ item }}"
+    state: present
+    ssh_pub_key: "{{ lookup('file', '~/.ssh/' + item + '.pub') }}"
+  with_items: digital_ocean_hosts
+  register: digital_ocean_ssh_keys
