@@ -1,0 +1,9 @@
+#!/usr/bin/env ansible-playbook
+# Playbook for testing
+---
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  roles:
+    - digital_ocean.ssh_key
+    - digital_ocean.droplet

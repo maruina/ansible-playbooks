@@ -1,7 +1,7 @@
 ---
 language: python
 python: "2.7"
-# Add comment to trigger a build
+
 # Use the new container infrastructure
 sudo: false
 
@@ -16,16 +16,10 @@ install:
   - pip install ansible
   - pip install dopy==0.3.5
 
-
-  # Check ansible version
-  - ansible --version
-
-  # Create ansible.cfg with correct roles_path
-  - printf '[defaults]\nroles_path=../roles' >ansible.cfg
-
 script:
   # Basic role syntax check
-  - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
+  - ansible-playbook test.yml --syntax-check
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
+  email: false
