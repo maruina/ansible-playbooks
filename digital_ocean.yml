@@ -1,11 +1,13 @@
 #!/usr/bin/env ansible-playbook
 # Playbook for bootstrap Digital Ocean droplets
+# Invoke with --vault-password-file /path/to/file
 ---
 - hosts: localhost
   connection: local
   gather_facts: no
   vars_files:
     - vars/digital_ocean.yml
+    - vars/vault_digital_ocean.yml
   roles:
     - digital_ocean.ssh_key
     - digital_ocean.droplet

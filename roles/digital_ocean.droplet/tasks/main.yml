@@ -14,11 +14,12 @@
     - digital_ocean_hosts
     - digital_ocean_ssh_keys.results
   register: digital_ocean_droplets
+  no_log: True
 
-- debug: msg="{{ digital_ocean_droplets }}"
-
-# Add host to the inventory
-- add_host: hostname={{ item.droplet.ip_address }}
-            ansible_host={{ item.droplet.name }}
-            ansible_user={{ digital_ocean_user }}
+- name: Add new droplets to inventory
+  add_host:
+    hostname: "{{ item.droplet.ip_address }}"
+    ansible_host: "{{ item.droplet.name }}"
+    ansible_user: "{{ digital_ocean_user }}"
   with_items: digital_ocean_droplets.results
+  no_log: True

@@ -3,7 +3,7 @@
   shell: test -f ~/.ssh/{{ item }} || ssh-keygen -t rsa -N '' -b 4096 -C "{{ item }}@digitalocean.com" -f ~/.ssh/{{ item }}
   with_items: digital_ocean_hosts
 
-- name: Create Digital Ocean SSH key from local key
+- name: Create Digital Ocean root SSH key from local key
   digital_ocean:
     command: ssh
     api_token: "{{ digital_ocean_api_token }}"
