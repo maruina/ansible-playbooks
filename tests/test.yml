@@ -2,4 +2,5 @@
 - hosts: localhost
   remote_user: root
   roles:
+    - digital_ocean.ssh_key
     - digital_ocean.droplet
