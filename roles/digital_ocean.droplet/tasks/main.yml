@@ -1,0 +1,25 @@
+---
+- name: Create Digital Ocean droplet
+  digital_ocean:
+    api_token: "{{ digital_ocean_api_token }}"
+    command: droplet
+    image_id: "{{ digital_ocean_ubuntu }}"
+    name: "{{ item[0] }}"
+    region_id: "{{ digital_ocean_region_id }}"
+    size_id: "{{ digital_ocean_droplet_size }}"
+    ssh_key_ids: "{{ item[1].ssh_key.id }}"
+    state: present
+    unique_name: yes
+  with_nested:
+    - digital_ocean_hosts
+    - digital_ocean_ssh_keys.results
+  register: digital_ocean_droplets
+  no_log: True
+
+- name: Add new droplets to inventory
+  add_host:
+    hostname: "{{ item.droplet.ip_address }}"
+    ansible_host: "{{ item.droplet.name }}"
+    ansible_user: "{{ digital_ocean_user }}"
+  with_items: digital_ocean_droplets.results
+  no_log: True
