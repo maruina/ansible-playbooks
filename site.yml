@@ -1,3 +1,7 @@
 #!/usr/bin/env ansible-playbook
 # Master playbook without bootstrapping
 ---
+- hosts: all
+  gather_facts: yes
+  roles:
+    - devuan
