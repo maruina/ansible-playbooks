@@ -15,12 +15,9 @@ install:
   # Install ansible
   - pip install ansible
 
-  # Create ansible.cfg with correct roles_path
-  - printf '[defaults]\nroles_path = ../' > ansible.cfg
-
 script:
   # Download ansible roles
-  - ansible-galaxy install -r requirements.yml
+  - ansible-galaxy install -r requirements.yml -p $TRAVIS_BUILD_DIR
   # Basic role syntax check
   - ansible-playbook test.yml --syntax-check
 
