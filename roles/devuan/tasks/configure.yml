@@ -13,3 +13,20 @@
 
 - name: Remove any previously recommended package
   shell: apt-get autoremove --purge
+
+- name: Remove systemd and dbus
+  apt:
+    name: "{{ item }}"
+    state: absent
+    purge: yes
+  with_items:
+    - systemd
+    - systemd-shim
+    - libsystemd0
+    - dbus
+
+- name: Remove recommends and orphaned packages again
+  shell: apt-get autoremove --purge
+
+- name: Remove unused package caches
+  shell: apt-get autoclean
