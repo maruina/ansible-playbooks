@@ -35,5 +35,5 @@
     host: "{{ inventory_hostname }}"
     state: started
     delay: 30
-    timeout: 300
+    timeout: 60
   become: false
