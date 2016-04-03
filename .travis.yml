@@ -17,7 +17,7 @@ install:
 
 script:
   # Download ansible roles
-  - ansible-galaxy install -r requirements.yml -p $TRAVIS_BUILD_DIR
+  - ansible-galaxy install -r requirements.yml -p $TRAVIS_BUILD_DIR/roles
   # Basic role syntax check
   - ansible-playbook test.yml --syntax-check
 
