@@ -1,0 +1,39 @@
+---
+- name: Remove current apt source list
+  replace:
+    backup: true
+    dest: /etc/apt/sources.list
+    regexp: '^deb (?!http://packages.devuan.org).*'
+
+- name: Add Devuan apt source
+  lineinfile:
+    dest: /etc/apt/sources.list
+    line: 'deb http://packages.devuan.org/merged jessie main'
+    state: present
+
+- name: Install Devuan keyring
+  apt:
+    force: yes
+    name: devuan-keyring
+    update_cache: yes
+
+- name: Migrate to Devuan
+  apt:
+    upgrade: dist
+    update_cache: yes
+
+- name: Restart server
+  shell: sleep 2 && shutdown -r now "Ansible dist-upgrade triggered"
+  async: 1
+  poll: 0
+  become: true
+  ignore_errors: true
+
+- name: Waiting for server to come back
+  local_action:
+    module: wait_for
+    host: "{{ inventory_hostname }}"
+    state: started
+    delay: 30
+    timeout: 300
+  become: false

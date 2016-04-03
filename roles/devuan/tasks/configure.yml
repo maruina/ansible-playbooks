@@ -1,0 +1,15 @@
+---
+- name: Ignore all recommended packages as default
+  copy:
+    src: files/01lean
+    dest: /etc/apt/apt.conf.d/01lean
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Protect importan recommended packages from removal
+  apt:
+    name: ca-certificates
+
+- name: Remove any previously recommended package
+  shell: apt-get autoremove --purge
