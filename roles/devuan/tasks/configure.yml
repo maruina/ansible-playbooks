@@ -12,7 +12,7 @@
     name: ca-certificates
 
 - name: Remove any previously recommended package
-  shell: apt-get autoremove --purge
+  shell: apt-get autoremove --purge --yes --force-yes
 
 - name: Remove systemd and dbus
   apt:
@@ -26,7 +26,7 @@
     - dbus
 
 - name: Remove recommends and orphaned packages again
-  shell: apt-get autoremove --purge
+  shell: apt-get autoremove --purge --yes --force-yes
 
 - name: Remove unused package caches
-  shell: apt-get autoclean
+  shell: apt-get autoclean --yes --force-yes
