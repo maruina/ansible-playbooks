@@ -1,6 +1,7 @@
 #!/usr/bin/env ansible-playbook
-# Master playbook without bootstrapping
+# Master playbook
 ---
 - hosts: all
   roles:
     - maruina.devuan
+    - maruina.system
