@@ -1,2 +1,3 @@
 - src: maruina.devuan
 - src: maruina.system
+- src: maruina.nginx
