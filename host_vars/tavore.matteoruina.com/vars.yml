@@ -1,6 +1,13 @@
 ---
 # maruina.system
 system_users: "{{ vault_system_users }}"
+system_fail2ban_jails:
+  ssh:
+    - enabled "true"
+    - port ssh
+    - filter sshd
+    - logpath /var/log/auth.log
+    - maxretry 3
 
 # maruina.nginx
 nginx_sites_available: "{{ vault_nginx_sites_available }}"
