@@ -1,0 +1,10 @@
+---
+# maruina.system
+system_users: "{{ vault_system_users }}"
+
+# maruina.nginx
+nginx_sites_available: "{{ vault_nginx_sites_available }}"
+nginx_sites_enabled: "{{ vault_nginx_sites_enabled }}"
+nginx_blog_server_name: "{{ vault_nginx_blog_server_name }}"
+nginx_blog_root_dir: "{{ vault_nginx_blog_root_dir }}"
+nginx_sites: "{{ vault_nginx_sites }}"
