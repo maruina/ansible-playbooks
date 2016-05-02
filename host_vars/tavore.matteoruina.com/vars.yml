@@ -7,7 +7,8 @@ system_fail2ban_jails:
     - port ssh
     - filter sshd
     - logpath /var/log/auth.log
-    - maxretry 3
+    - maxretry 1
+system_fail2ban_bantime: 3600
 
 # maruina.nginx
 nginx_sites_available: "{{ vault_nginx_sites_available }}"
