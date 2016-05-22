@@ -1,0 +1,7 @@
+---
+blog_user: www-data
+blog_group: www-data
+blog_repo: https://github.com/maruina/matteoruina.com
+blog_dest_dir: /var/www/blog
+blog_temp_dir: /tmp/blog
+blog_http_service: nginx

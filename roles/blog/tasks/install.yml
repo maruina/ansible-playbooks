@@ -1,0 +1,26 @@
+---
+- name: Clone blog repository
+  git:
+    repo: "{{ blog_repo }}"
+    dest: "{{ blog_temp_dir }}"
+    force: yes
+  register: clone_blog
+
+- name: Copy public folder
+  shell: "cp -R {{ blog_temp_dir }}/* {{ blog_dest_dir }}"
+  when: clone_blog.changed
+
+- name: Fix permissions
+  file:
+    state: directory
+    owner: "{{ blog_user }}"
+    group: "{{ blog_group }}"
+    recurse: yes
+    dest: " {{blog_dest_dir }}"
+  when: clone_blog.changed
+
+- name: Restart http server
+  service:
+    name: "{{ blog_http_service }}"
+    state: restarted
+  when: clone_blog.changed
